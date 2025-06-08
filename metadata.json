@@ -1,0 +1,8 @@
+{
+  "name": "QR Payment App",
+  "description": "An application for sellers to generate QR codes for products with split USDT/TRX payments, and for buyers to scan and make purchases. Supports image upload/capture for products.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "prompt": ""
+}

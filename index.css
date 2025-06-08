@@ -1,0 +1,12 @@
+
+/* Tailwind base, components, and utilities are primarily sourced from CDN in index.html */
+/* This file can be used for minimal global overrides or custom base styles if absolutely needed. */
+body {
+  font-family: 'Inter', sans-serif; /* Example: ensure a nice default font */
+}
+
+/* For html5-qrcode focus ring, if needed */
+#qr-reader-buyer button {
+  outline: none !important;
+  box-shadow: none !important;
+}
