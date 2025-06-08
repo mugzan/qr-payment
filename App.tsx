@@ -1,13 +1,13 @@
 
 import React from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import SellerPage from './pages/SellerPage';
-import BuyerPage from './pages/BuyerPage';
-import QrDisplayPage from './pages/QrDisplayPage'; // New import for QR display page
+import SellerPage from './pages/SellerPage.js'; // New import for QR display page
+import BuyerPage from './pages/BuyerPage.js';
+import QrDisplayPage from './pages/QrDisplayPage.js'; // New import for QR display page
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const location = useLocation();
-  const getLinkClass = (path: string) => {
+  const getLinkClass = (path) => { // Removed type
     return location.pathname === path
       ? 'bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium'
       : 'text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md text-sm font-medium';
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
   );
 };
 
-const App: React.FC = () => {
+const App = () => { // Removed type
   return (
     <HashRouter>
       <div className="min-h-screen flex flex-col">
@@ -43,7 +43,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<SellerPage />} />
             <Route path="/buyer" element={<BuyerPage />} />
-            <Route path="/qr-display" element={<QrDisplayPage />} /> {/* New route */}
+            <Route path="/qr-display" element={<QrDisplayPage />} />
           </Routes>
         </main>
         <footer className="bg-gray-800 text-white text-center p-4">

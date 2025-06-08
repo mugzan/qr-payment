@@ -1,17 +1,17 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Html5Qrcode, Html5QrcodeScannerState } from 'html5-qrcode';
-import { ProductQRCodeData } from '../types';
+import { ProductQRCodeData } from '../types'; // This import is fine
 
 const QR_READER_ELEMENT_ID = "qr-reader-buyer";
 
-const BuyerPage: React.FC = () => {
-  const [scannedData, setScannedData] = useState<ProductQRCodeData | null>(null);
-  const [quantity, setQuantity] = useState<number>(1);
-  const [scanError, setScanError] = useState<string | null>(null);
-  const [isScanning, setIsScanning] = useState<boolean>(false);
+const BuyerPage = () => { // Removed React.FC
+  const [scannedData, setScannedData] = useState(null); // Removed <ProductQRCodeData | null>
+  const [quantity, setQuantity] = useState(1); // Removed <number>
+  const [scanError, setScanError] = useState(null); // Removed <string | null>
+  const [isScanning, setIsScanning] = useState(false); // Removed <boolean>
   
-  const html5QrCodeRef = useRef<Html5Qrcode | null>(null);
+  const html5QrCodeRef = useRef(null); // Removed <Html5Qrcode | null>
 
   const stopScanner = useCallback(() => {
     if (html5QrCodeRef.current && html5QrCodeRef.current.getState() === Html5QrcodeScannerState.SCANNING) {
@@ -44,10 +44,10 @@ const BuyerPage: React.FC = () => {
     setScannedData(null); 
     setIsScanning(true);
 
-    const qrCodeSuccessCallback = (decodedText: string) => {
+    const qrCodeSuccessCallback = (decodedText) => { // Removed decodedText: string
       try {
-        const parsedData: ProductQRCodeData = JSON.parse(decodedText);
-        if (parsedData && typeof parsedData.totalPriceUSD === 'number' && typeof parsedData.usdtAmountUSD === 'number' && typeof parsedData.ivyAmountUSD === 'number') { // Check for ivyAmountUSD
+        const parsedData = JSON.parse(decodedText); // Removed : ProductQRCodeData
+        if (parsedData && typeof parsedData.totalPriceUSD === 'number' && typeof parsedData.usdtAmountUSD === 'number' && typeof parsedData.ivyAmountUSD === 'number') { 
           setScannedData(parsedData);
           setScanError(null);
           setQuantity(1); 
@@ -63,11 +63,7 @@ const BuyerPage: React.FC = () => {
       }
     };
 
-    const qrCodeErrorCallback = (errorMessage: string) => {
-        // Log scan errors. "QR code not found" is common and expected when no QR is in view.
-        // More critical errors (e.g., parse errors if they ever get routed here,
-        // or library internal errors) should be logged.
-        // Avoid setting state here frequently as it can cause performance issues.
+    const qrCodeErrorCallback = (errorMessage) => { // Removed errorMessage: string
         console.warn(`QR Code scan error reported by library: ${errorMessage}`);
     };
     
@@ -107,7 +103,7 @@ const BuyerPage: React.FC = () => {
     };
   }, []);
 
-  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleQuantityChange = (event) => { // Removed event: React.ChangeEvent<HTMLInputElement>
     const val = parseInt(event.target.value, 10);
     if (!isNaN(val) && val > 0) {
       setQuantity(val);

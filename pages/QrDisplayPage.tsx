@@ -3,20 +3,13 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { QRCodeCanvas } from 'qrcode.react';
 
-interface QrDisplayLocationState {
-  qrStringToEncode: string;
-  productImageBase64: string | null;
-  imageWasRemovedFromQr: boolean; // New flag
-  totalPriceUSD: number;
-  usdtAmountUSD: number;
-  ivyAmountUSD: number;
-  ivyAmountNative: number;
-}
+// Interface QrDisplayLocationState removed as it's TypeScript specific.
+// The checks below will rely on duck-typing.
 
-const QrDisplayPage: React.FC = () => {
+const QrDisplayPage = () => { // Removed React.FC
   const location = useLocation();
   const navigate = useNavigate();
-  const state = location.state as QrDisplayLocationState | null;
+  const state = location.state; // Removed type assertion
 
   if (!state || 
       typeof state.qrStringToEncode !== 'string' || 
@@ -24,7 +17,7 @@ const QrDisplayPage: React.FC = () => {
       typeof state.usdtAmountUSD !== 'number' ||
       typeof state.ivyAmountUSD !== 'number' ||
       typeof state.ivyAmountNative !== 'number' ||
-      typeof state.imageWasRemovedFromQr !== 'boolean' // Check for the new flag
+      typeof state.imageWasRemovedFromQr !== 'boolean'
      ) {
     React.useEffect(() => {
       console.error("Invalid or incomplete state received for QrDisplayPage, navigating back.", state);

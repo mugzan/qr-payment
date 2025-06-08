@@ -1,8 +1,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css'; // Placeholder, Tailwind is loaded via CDN. This file can be empty or removed if no global styles beyond Tailwind are needed.
+import App from './App.js'; // Updated import
+import './index.css'; 
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
